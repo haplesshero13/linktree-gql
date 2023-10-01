@@ -1,0 +1,30 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateLinkInput {
+  href: String!
+  text: String!
+}
+
+type Link {
+  href: String!
+  id: Int!
+  text: String!
+}
+
+type Mutation {
+  createLink(link: CreateLinkInput!): Link!
+  deleteLink(id: Int!): Boolean!
+  updateMany(links: [UpdateLinkInput!]!): [Link!]!
+}
+
+type Query {
+  getLinks: [Link!]!
+}
+
+input UpdateLinkInput {
+  href: String!
+  id: Int!
+  text: String!
+}
