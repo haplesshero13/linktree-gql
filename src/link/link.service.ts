@@ -1,37 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { Link } from './link.model';
 import { CreateLinkInput } from './link.input';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class LinkService {
-  private links = [{ id: 1, href: 'https://google.com', text: 'Google!' }];
+  constructor(
+    @InjectRepository(Link)
+    private linksRepository: Repository<Link>,
+  ) {}
 
   findMany() {
-    return this.links;
+    return this.linksRepository.find();
   }
 
   update(link: Link) {
-    const foundIndex = this.links.findIndex((item) => item.id === link.id);
-
-    if (foundIndex < 0) {
-      return null;
-    }
-
-    this.links[foundIndex] = link;
-
-    return this.links[foundIndex];
+    return this.linksRepository.save(link);
   }
 
   create(link: CreateLinkInput) {
-    this.links.push({ ...link, id: this.links.length + 1 });
-
-    return this.links[this.links.length - 1];
+    return this.linksRepository.save(link);
   }
 
-  delete(id: number) {
-    const foundIndex = this.links.findIndex((item) => item.id === id);
-    this.links = this.links.filter((item) => item.id !== id);
+  async delete(id: number) {
+    const result = await this.linksRepository.delete(id);
 
-    return foundIndex >= 0;
+    return result.affected != null && result.affected > 0;
   }
 }
