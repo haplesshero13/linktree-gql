@@ -24,11 +24,11 @@ export class LinkResolver {
     return this.linkService.delete(id);
   }
 
-  @Mutation(() => [Link])
-  async updateMany(
-    @Args({ name: 'links', type: () => [UpdateLinkInput] })
-    links: UpdateLinkInput[],
-  ): Promise<Link[]> {
-    return this.linkService.updateMany(links);
+  @Mutation(() => Link)
+  async updateLink(
+    @Args({ name: 'link', type: () => UpdateLinkInput })
+    link: UpdateLinkInput,
+  ): Promise<Link | null> {
+    return this.linkService.update(link);
   }
 }

@@ -10,10 +10,16 @@ export class LinkService {
     return this.links;
   }
 
-  updateMany(links: Link[]) {
-    this.links = links;
+  update(link: Link) {
+    const foundIndex = this.links.findIndex((item) => item.id === link.id);
 
-    return this.links;
+    if (foundIndex < 0) {
+      return null;
+    }
+
+    this.links[foundIndex] = link;
+
+    return this.links[foundIndex];
   }
 
   create(link: CreateLinkInput) {

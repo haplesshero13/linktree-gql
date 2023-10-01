@@ -16,7 +16,7 @@ type Link {
 type Mutation {
   createLink(link: CreateLinkInput!): Link!
   deleteLink(id: Int!): Boolean!
-  updateMany(links: [UpdateLinkInput!]!): [Link!]!
+  updateLink(link: UpdateLinkInput!): Link!
 }
 
 type Query {
