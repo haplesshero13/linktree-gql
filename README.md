@@ -12,6 +12,10 @@ This is the NestJS Apollo backend for the Links app. It uses TypeORM to access t
 $ yarn install
 ```
 
+## Running the Tests
+
+The e2e test can be run with `yarn test`.
+
 ## Running the app
 
 First install docker and docker-compose (the Docker Desktop app is probably easiest: https://docs.docker.com/desktop/).
